@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Yassmine Saidi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0d4fa; /* Soft purple background */
+            font-family: 'Fredoka One', cursive; 
+            overflow: hidden; /* Stops scrollbars when button moves */
+        }
+
+        #question-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Ensures everything is centered */
+            width: 100%;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+            line-height: 1.2;
+            text-shadow: 3px 3px 0px #efa3f0, 6px 6px 0px rgba(0,0,0,0.1);
+        }
+
+        .gif-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .gif-container img {
+            width: 200px;
+            border-radius: 20px;
+            /* Shadow removed here */
+        }
+
+        .buttons {
+            position: relative;
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border: none; /* Removed border from buttons for cleaner look */
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Fredoka One', cursive;
+            transition: transform 0.2s; 
+            box-shadow: 0 6px 0px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        #yesBtn {
+            background-color: #ff69b4; /* Hot pink */
+            color: white;
+            z-index: 10;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #ff4da6;
+        }
+
+        #noBtn {
+            background-color: white;
+            color: #ff69b4;
+            /* Initial positioning handled by flexbox, then script takes over */
+        }
+
+        /* Hidden success message */
+        #success-message {
+            display: none;
+            text-align: center;
+            /* Added flex properties to ensure success screen centers correctly */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        #success-message h2 {
+            color: white;
+            font-size: 4rem;
+            margin-top: 20px;
+            text-shadow: 3px 3px 0px #efa3f0, 6px 6px 0px rgba(0,0,0,0.1);
+        }
+        
+        #success-message img {
+             width: 200px;
+             border-radius: 20px;
+             /* Shadow removed here */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="question-container">
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6eWwxY3I4d2o5bnh5bm15b3I4bnh5bm15b3I4bnh5bm15b3I4biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute Bear">
+        </div>
+        
+        <h1>Will you be my Valentine,<br>Yassmine Saidi?</h1>
+
+        <div class="buttons">
+            <button id="yesBtn" onclick="acceptLove()">Yes</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <div id="success-message">
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3R6eWwxY3I4d2o5bnh5bm15b3I4bnh5bm15b3I4bnh5bm15b3I4biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/T86i6yDyOYz7J6dPhf/giphy.gif" alt="Happy Bear">
+        </div>
+        <h2>Yay! I love you Yassmine! ❤️</h2>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const questionContainer = document.getElementById('question-container');
+        const successMessage = document.getElementById('success-message');
+
+        // Function to move the 'No' button randomly
+        function moveButton() {
+            // Get window dimensions
+            const maxWidth = window.innerWidth - noBtn.offsetWidth;
+            const maxHeight = window.innerHeight - noBtn.offsetHeight;
+
+            // Generate random coordinates (with padding to stay on screen)
+            const randomX = Math.floor(Math.random() * (maxWidth - 20));
+            const randomY = Math.floor(Math.random() * (maxHeight - 20));
+
+            // Apply new position
+            noBtn.style.position = 'fixed'; // Changes from relative to fixed so it can fly anywhere
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Function to handle the 'Yes' click
+        function acceptLove() {
+            questionContainer.style.display = 'none';
+            // Use flex to keep alignment correct
+            successMessage.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
